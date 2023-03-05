@@ -534,3 +534,71 @@ console.log("----------------------");
 // * ------------------------------------------------------------
 console.log("----------------------");
 // * ------------------------------------------------------------
+
+/* 
+
+* Convert HTML Entities
+
+Convert the characters &, <, >, " (double quote), and ' (apostrophe), 
+in a string to their corresponding HTML entities.
+
+*/
+
+function convertHTML(str) {
+  // create a object of html entities (u can work without object)
+  let entities = {
+    ampersand: "&amp;",
+    lessThan: "&lt;",
+    greaterThan: "&gt;",
+    doubleQuote: "&quot;",
+    apostrophe: "&apos;",
+  };
+
+  // create match func to match every char with the htmlEntitie
+  function match(char) {
+    switch (char) {
+      case "&":
+        return entities.ampersand;
+      case "<":
+        return entities.lessThan;
+      case ">":
+        return entities.greaterThan;
+      case '"':
+        return entities.doubleQuote;
+      case "'":
+        return entities.apostrophe;
+    }
+  }
+
+  // to hold within it the result
+  let answer = [];
+
+  // mainLoop
+  for (let i = 0; i < str.length; i++) {
+    if (match(str[i])) {
+      answer.push(match(str[i]));
+    } else {
+      answer.push(str[i]);
+    }
+  }
+
+  // return answer
+  return answer.join("");
+}
+console.log(convertHTML("Dolce & Gabbana"));
+console.log(convertHTML("Hamburgers < Pizza < Tacos"));
+console.log(convertHTML("Sixty > twelve"));
+console.log(convertHTML('Stuff in "quotation marks"'));
+console.log(convertHTML("Schindler's List"));
+console.log(convertHTML("<>"));
+console.log(convertHTML("abc"));
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+
+// ---- test ----
+// console.log("@@@@");
