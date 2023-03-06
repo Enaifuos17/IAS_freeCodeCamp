@@ -600,5 +600,65 @@ console.log("----------------------");
 console.log("----------------------");
 // * ------------------------------------------------------------
 
-// ---- test ----
-// console.log("@@@@");
+/* 
+
+* Sum All Odd Fibonacci Numbers
+
+Given a positive integer num, 
+return the sum of all odd Fibonacci numbers that are less than or equal to num.
+
+The first two numbers in the Fibonacci sequence are 0 and 1. 
+Every additional number in the sequence is the sum of the two previous numbers. 
+The first seven numbers of the Fibonacci sequence are 0, 1, 1, 2, 3, 5 and 8.
+
+For example, 
+sumFibs(10) should return 10 
+because all odd Fibonacci numbers less than or equal to 10 are 1, 1, 3, and 5.
+
+*/
+
+function sumFibs(num) {
+  let prevNumber = 0;
+  let currentNumber = 1;
+  let sequence = [0, 1];
+  let sum = 0;
+
+  // * function to get the Fibonacci numbers that are lessThan or equal to "num"
+  function getFibonacciNumbers() {
+    for (let i = 0; currentNumber <= num; i++) {
+      currentNumber += prevNumber;
+      // check again after the += if currenNumber <= num
+      if (currentNumber <= num) {
+        sequence.push(currentNumber);
+      }
+      // intialize the prevNumber (its always the )
+      prevNumber = currentNumber - prevNumber;
+    }
+    return sequence;
+  }
+
+  // console.log(getFibonacciNumbers()); [to know the Febonacci Numbers of the "num"]
+
+  // * filter and get just the ODD Fibonacci numbers
+  let oddNumbers = getFibonacciNumbers().filter((el) => el % 2 !== 0);
+
+  // * SUM --> ODD Fibonacci numbers
+  sum = oddNumbers.reduce((prev, curr) => prev + curr);
+
+  // *
+  return sum;
+}
+
+console.log(sumFibs(1)); // 2
+console.log(sumFibs(1000)); // 1785
+console.log(sumFibs(4000000)); // 4613732
+console.log(sumFibs(4)); // 5
+console.log(sumFibs(75024)); // 60696
+console.log(sumFibs(75025)); // 135721
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
