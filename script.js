@@ -718,3 +718,71 @@ console.log("----------------------");
 // * ------------------------------------------------------------
 console.log("----------------------");
 // * ------------------------------------------------------------
+
+/*
+
+*Smallest Common Multiple
+
+Find the smallest common multiple of the provided parameters 
+that can be evenly divided by both, 
+
+as well as by all sequential numbers in the range between these parameters.
+
+The range will be an array of two numbers 
+that will not necessarily be in numerical order.
+
+For example, 
+if given 1 and 3, 
+find the smallest common multiple of both 1 and 3 
+that is also evenly divisible by all numbers between 1 and 3. 
+The answer here would be 6.
+
+*/
+
+function smallestCommons(arr) {
+  if (arr[0] > arr[1]) {
+    let temp = arr[0];
+    arr[0] = arr[1];
+    arr[1] = temp;
+  }
+  //
+  let range = [];
+  let answer = [];
+  let x = 0;
+  let maxNumber = Number.MAX_SAFE_INTEGER;
+  // * loop to set the array of range
+  for (let i = arr[0]; i <= arr[1]; i++) {
+    range.push(i);
+  }
+  // * mainLoop
+  for (let i = 1; i <= maxNumber; i++) {
+    // secondLoop
+    for (let j = 0; j < range.length; j++) {
+      if (i % range[j] === 0) {
+        x++;
+      }
+    }
+    //
+    if (x === range.length) {
+      answer.push(i);
+      break;
+    } else {
+      x = 0;
+    }
+  }
+  // *
+  return answer[0];
+}
+
+console.log(smallestCommons([1, 3])); // 6
+console.log(smallestCommons([1, 5])); // 60
+console.log(smallestCommons([5, 1])); // 60
+console.log(smallestCommons([2, 10])); // 2520
+console.log(smallestCommons([1, 13])); // 360360
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
