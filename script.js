@@ -721,7 +721,7 @@ console.log("----------------------");
 
 /*
 
-*Smallest Common Multiple
+* Smallest Common Multiple
 
 Find the smallest common multiple of the provided parameters 
 that can be evenly divided by both, 
@@ -779,6 +779,160 @@ console.log(smallestCommons([1, 5])); // 60
 console.log(smallestCommons([5, 1])); // 60
 console.log(smallestCommons([2, 10])); // 2520
 console.log(smallestCommons([1, 13])); // 360360
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+
+/* 
+
+* Drop it
+
+Given the array arr, 
+iterate through and remove each element 
+starting from the first element (the 0 index) 
+until the function func returns true when the iterated element is passed through it.
+
+Then return:
+the rest of the array once the condition is satisfied, 
+otherwise, arr should be returned as an empty array.
+
+*/
+
+function dropElements(arr, func) {
+  let result = [];
+  // iterate through arr
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i])) {
+      return arr.slice(i); // return the rest of the array...
+    }
+  }
+  return result;
+}
+
+console.log(
+  dropElements([1, 2, 3], function (n) {
+    return n < 3;
+  })
+); // [1, 2, 3]
+console.log(
+  dropElements([1, 2, 3, 4], function (n) {
+    return n >= 3;
+  })
+); // [3, 4]
+console.log(
+  dropElements([0, 1, 0, 1], function (n) {
+    return n === 1;
+  })
+); // [1, 0, 1]
+console.log(
+  dropElements([1, 2, 3], function (n) {
+    return n > 0;
+  })
+); // [1, 2, 3]
+console.log(
+  dropElements([1, 2, 3, 4], function (n) {
+    return n > 5;
+  })
+); // []
+console.log(
+  dropElements([1, 2, 3, 7, 4], function (n) {
+    return n > 3;
+  })
+); // [7, 4]
+console.log(
+  dropElements([1, 2, 3, 9, 2], function (n) {
+    return n > 2;
+  })
+); // [3, 9, 2]
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+
+/* 
+
+* Steamroller
+
+Flatten a nested array. 
+You must account for varying levels of nesting.
+"Your solution should not use:
+the Array.prototype.flat() 
+or 
+Array.prototype.flatMap() methods."
+
+*/
+
+function steamrollArray(arr) {
+  let answer = [].concat(...arr);
+  // if there's still some array(s) inside the MAIN array
+  if (answer.some(Array.isArray)) {
+    return steamrollArray(answer);
+  } else {
+    return answer;
+  }
+}
+
+console.log(steamrollArray([1, [2], [3, [[4]]]]));
+console.log(steamrollArray([[["a"]], [["b"]]]));
+console.log(steamrollArray([1, [2], [3, [[4]]]]));
+console.log(steamrollArray([1, [], [3, [[4]]]]));
+console.log(steamrollArray([1, {}, [3, [[4]]]]));
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+
+/* 
+
+* Binary Agents
+
+Return an English translated sentence of the passed binary string.
+The binary string will be space separated.
+
+*/
+
+function binaryAgent(str) {
+  // use split the binary into an array
+  let answer = str.split(" ");
+  // convert binary to decimal
+  for (let i = 0; i < answer.length; i++) {
+    answer[i] = parseInt(answer[i], 2); // 2 base
+  }
+  // convert each decimal number to its value
+  for (let i = 0; i < answer.length; i++) {
+    answer[i] = String.fromCharCode(answer[i]);
+  }
+  // join elements together
+  answer = answer.join("");
+  //
+  return answer;
+}
+
+console.log(
+  binaryAgent(
+    "01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111"
+  )
+);
+console.log(
+  binaryAgent(
+    "01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111"
+  )
+);
+console.log(
+  binaryAgent(
+    "01001001 00100000 01101100 01101111 01110110 01100101 00100000 01000110 01110010 01100101 01100101 01000011 01101111 01100100 01100101 01000011 01100001 01101101 01110000 00100001"
+  )
+);
 
 // * ------------------------------------------------------------
 console.log("----------------------");
