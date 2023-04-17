@@ -940,3 +940,275 @@ console.log("----------------------");
 // * ------------------------------------------------------------
 console.log("----------------------");
 // * ------------------------------------------------------------
+
+/*
+
+* Everything Be True
+
+Check if the predicate (second argument) 
+is truthy on all elements of a collection (first argument).
+
+In other words, 
+you are given an array collection of objects. 
+The predicate pre will be an object property 
+and you need to return true if its value is truthy. 
+Otherwise, return false.
+
+In JavaScript, 
+truthy values are values that translate to true 
+when evaluated in a Boolean context.
+
+Remember, 
+you can access object properties through either dot notation or [] notation.
+
+*/
+
+function truthCheck(collection, pre) {
+  let checker = true;
+  // mainLoop
+  for (let i = 0; i < collection.length; i++) {
+    if (!collection[i][pre]) {
+      checker = false;
+    }
+  }
+  return checker;
+}
+
+console.log(
+  truthCheck(
+    [
+      { name: "Quincy", role: "Founder", isBot: false },
+      { name: "Naomi", role: "", isBot: false },
+      { name: "Camperbot", role: "Bot", isBot: true },
+    ],
+    "isBot"
+  )
+); // false
+
+console.log(
+  truthCheck(
+    [
+      { name: "Quincy", role: "Founder", isBot: false },
+      { name: "Naomi", role: "", isBot: false },
+      { name: "Camperbot", role: "Bot", isBot: true },
+    ],
+    "name"
+  )
+); // true
+
+console.log(
+  truthCheck(
+    [
+      { name: "Quincy", role: "Founder", isBot: false },
+      { name: "Naomi", role: "", isBot: false },
+      { name: "Camperbot", role: "Bot", isBot: true },
+    ],
+    "role"
+  )
+); // false
+
+console.log(
+  truthCheck(
+    [
+      { name: "Pikachu", number: 25, caught: 3 },
+      { name: "Togepi", number: 175, caught: 1 },
+    ],
+    "number"
+  )
+); // true
+
+console.log(
+  truthCheck(
+    [
+      { name: "Pikachu", number: 25, caught: 3 },
+      { name: "Togepi", number: 175, caught: 1 },
+      { name: "MissingNo", number: NaN, caught: 0 },
+    ],
+    "caught"
+  )
+); // false
+
+console.log(
+  truthCheck(
+    [
+      { name: "Pikachu", number: 25, caught: 3 },
+      { name: "Togepi", number: 175, caught: 1 },
+      { name: "MissingNo", number: NaN, caught: 0 },
+    ],
+    "number"
+  )
+); // false
+
+console.log(
+  truthCheck(
+    [
+      {
+        id: 1,
+        data: { url: "https://freecodecamp.org", name: "freeCodeCamp" },
+      },
+      {
+        id: 2,
+        data: { url: "https://coderadio.freecodecamp.org/", name: "CodeRadio" },
+      },
+      { id: null, data: {} },
+    ],
+    "data"
+  )
+); // true
+
+console.log(
+  truthCheck(
+    [
+      {
+        id: 1,
+        data: { url: "https://freecodecamp.org", name: "freeCodeCamp" },
+      },
+      {
+        id: 2,
+        data: { url: "https://coderadio.freecodecamp.org/", name: "CodeRadio" },
+      },
+      { id: null, data: {} },
+    ],
+    "id"
+  )
+); // false
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+
+/* 
+
+* Arguments Optional
+
+Create a function that sums two arguments together. 
+If only one argument is provided, 
+then return a function that expects one argument 
+and returns the sum.
+
+For example: 
+addTogether(2, 3) should return 5
+and addTogether(2) should return a function.
+
+Calling this returned function with a single argument 
+will then return the sum:
+var sumTwoAnd = addTogether(2);
+sumTwoAnd(3) returns 5.
+
+If either argument isn't a valid number, return undefined.
+
+*/
+
+function addTogether() {
+  let arr = [...arguments];
+  // check if either arg isnt a number
+  for (let i = 0; i < arr.length; i++) {
+    if (typeof arr[i] !== "number") {
+      return undefined;
+    }
+  }
+  //
+  if (arr.length === 1) {
+    return function addNum2(num2) {
+      return addTogether(arr[0], num2);
+    };
+  } else {
+    return arr[0] + arr[1];
+  }
+}
+
+console.log(addTogether(2, 3)); // 5
+console.log(addTogether(23, 30)); // 53
+console.log(addTogether(5)(7)); // 12
+console.log(addTogether("https://www.youtube.com/watch?v=dQw4w9WgXcQ")); // undefined
+console.log(addTogether(2, "3")); // undefined
+console.log(addTogether(2)([3])); // undefined
+console.log(addTogether("2", 3)); // undefined
+console.log(addTogether(5, undefined)); // undefined
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+
+/* 
+
+* Make a Person
+
+Fill in the object constructor with the following methods below:
+
+getFirstName()
+getLastName()
+getFullName()
+setFirstName(first)
+setLastName(last)
+setFullName(firstAndLast)
+
+Run the tests to see the expected output for each method. 
+The methods that take an argument must accept only one argument and it has to be a string. 
+These methods must be the only available means of interacting with the object.
+
+*/
+
+const Person = function (firstAndLast) {
+  // Only change code below this line
+  // Complete the method below and implement the others similarly
+  // getFirstName()
+  this.getFirstName = function () {
+    return firstAndLast.split(" ")[0];
+  };
+
+  // getLastName()
+  this.getLastName = function () {
+    return firstAndLast.split(" ")[1];
+  };
+
+  // getFullName()
+  this.getFullName = function () {
+    return firstAndLast;
+  };
+
+  // setFirstName()
+  this.setFirstName = function (first) {
+    firstAndLast = `${first} ${firstAndLast.split(" ")[1]}`;
+  };
+
+  // setLastName()
+  this.setLastName = function (last) {
+    firstAndLast = `${firstAndLast.split(" ")[0]} ${last}`;
+  };
+
+  // setFullName()
+  this.setFullName = function (fullName) {
+    firstAndLast = fullName;
+  };
+};
+
+const bob = new Person("Bob Ross");
+
+console.log(bob.getFirstName()); // Bob
+console.log(bob.getLastName()); // Ross
+console.log(bob.getFullName()); // Bob Ross
+
+bob.setFirstName("Haskell");
+console.log(bob.getFullName()); // Haskell Ross
+
+bob.setLastName("Curry");
+console.log(bob.getFullName()); // Haskell Curry
+
+bob.setFullName("Haskell Curry");
+console.log(bob.getFullName()); // Haskell Curry
+console.log(bob.getFirstName()); // Haskell
+console.log(bob.getLastName()); // Curry
+
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
+// * ------------------------------------------------------------
+console.log("----------------------");
+// * ------------------------------------------------------------
